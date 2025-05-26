@@ -19,6 +19,8 @@ import modelo.Paciente;
 import modelo.Consulta;
 import modelo.RecetaMedica;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -39,6 +41,23 @@ public class CitaMedicaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
+ /*   public List<CitaMedica> findCitasByMedicoAndDate(Medico medico, Date fecha) {
+    EntityManager em = getEntityManager();
+    try {
+        Query query = em.createQuery(
+            "SELECT c FROM CitaMedica c WHERE c.idMedico = :medico AND DATE(c.fecha) = DATE(:fecha)");
+        /*query.setParameter("medico", medico);
+        query.setParameter("fecha", fecha);
+        return query.getResultList();//
+        query.setParameter("fecha", fecha);
+        List<CitaMedica> result = query.getResultList();
+        result.sort(Comparator.comparing(CitaMedica::getHora));
+        return result;
+        } finally {
+        em.close();
+        }
+    } */
+    
     public void create(CitaMedica citaMedica) {
         if (citaMedica.getRecetaMedicaList() == null) {
             citaMedica.setRecetaMedicaList(new ArrayList<RecetaMedica>());
